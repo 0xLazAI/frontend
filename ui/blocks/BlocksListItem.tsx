@@ -121,7 +121,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement, animation, chain
           </Skeleton>
         </Flex>
       ) }
-      { !isRollup && !config.UI.views.block.hiddenFields?.burnt_fees && (
+      { !isRollup && config.chain.display.burntFee && !config.UI.views.block.hiddenFields?.burnt_fees && (
         <Box>
           <Text fontWeight={ 500 }>Burnt fees</Text>
           <Flex columnGap={ 4 } mt={ 2 }>
