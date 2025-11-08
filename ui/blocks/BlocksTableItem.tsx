@@ -122,7 +122,7 @@ const BlocksTableItem = ({ data, isLoading, enableTimeIncrement, animation, chai
           </Skeleton>
         </TableCell>
       ) }
-      { !isRollup && !config.UI.views.block.hiddenFields?.burnt_fees && (
+      { !isRollup && config.chain.display.burntFee && !config.UI.views.block.hiddenFields?.burnt_fees && (
         <TableCell >
           <Flex alignItems="center" columnGap={ 2 }>
             <IconSvg name="flame" boxSize={ 5 } color={{ _light: 'gray.500', _dark: 'inherit' }} isLoading={ isLoading }/>

@@ -98,7 +98,7 @@ const BlockDetails = ({ query }: Props) => {
             </Tooltip>
           </>
         ) }
-        { !burntFees.isEqualTo(ZERO) && (
+        { !burntFees.isEqualTo(ZERO) && config.chain.display.burntFee && (
           <>
             { space }-{ space }
             <Tooltip content="Burnt fees">
@@ -374,7 +374,7 @@ const BlockDetails = ({ query }: Props) => {
         <>
           <DetailedInfo.ItemLabel
             hint={
-              `For each block, the ${ validatorTitle } is rewarded with a finite amount of ${ config.chain.currency.symbol || 'native token' } 
+              `For each block, the ${ validatorTitle } is rewarded with a finite amount of ${ config.chain.currency.symbol || 'native token' }
           on top of the fees paid for all transactions in the block`
             }
             isLoading={ isPlaceholderData }
@@ -496,11 +496,11 @@ const BlockDetails = ({ query }: Props) => {
         </>
       ) }
 
-      { !config.UI.views.block.hiddenFields?.burnt_fees && !burntFees.isEqualTo(ZERO) && (
+      { !config.UI.views.block.hiddenFields?.burnt_fees && config.chain.display.burntFee && !burntFees.isEqualTo(ZERO) && (
         <>
           <DetailedInfo.ItemLabel
             hint={
-              `Amount of ${ config.chain.currency.symbol || 'native token' } burned from transactions included in the block. 
+              `Amount of ${ config.chain.currency.symbol || 'native token' } burned from transactions included in the block.
               Equals Block Base Fee per Gas * Gas Used`
             }
             isLoading={ isPlaceholderData }

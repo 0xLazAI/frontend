@@ -25,7 +25,7 @@ const TxDetailsBurntFees = ({ data, isLoading }: Props) => {
 
   const value = BigNumber(data.transaction_burnt_fee || 0).plus(BigNumber(data.blob_gas_used || 0).multipliedBy(BigNumber(data.blob_gas_price || 0)));
 
-  if (value.isEqualTo(ZERO)) {
+  if (value.isEqualTo(ZERO) || !config.chain.display.burntFee) {
     return null;
   }
 

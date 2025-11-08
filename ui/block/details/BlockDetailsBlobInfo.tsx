@@ -4,6 +4,7 @@ import React from 'react';
 
 import type { Block } from 'types/api/block';
 
+import config from 'configs/app';
 import { currencyUnits } from 'lib/units';
 import { Tooltip } from 'toolkit/chakra/tooltip';
 import { WEI, WEI_IN_GWEI, ZERO } from 'toolkit/utils/consts';
@@ -60,7 +61,7 @@ const BlockDetailsBlobInfo = ({ data }: Props) => {
           </DetailedInfo.ItemValue>
         </>
       ) }
-      { !burntBlobFees.isEqualTo(ZERO) && (
+      { !burntBlobFees.isEqualTo(ZERO) && config.chain.display.burntFee && (
         <>
           <DetailedInfo.ItemLabel
             hint={ `Amount of ${ currencyUnits.ether } used for blobs in this block` }
