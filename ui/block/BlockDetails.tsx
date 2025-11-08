@@ -496,7 +496,7 @@ const BlockDetails = ({ query }: Props) => {
         </>
       ) }
 
-      { !config.UI.views.block.hiddenFields?.burnt_fees && config.chain.display.burntFee &&  !burntFees.isEqualTo(ZERO) && (
+      { !config.UI.views.block.hiddenFields?.burnt_fees && config.chain.display.burntFee && !burntFees.isEqualTo(ZERO) && (
         <>
           <DetailedInfo.ItemLabel
             hint={

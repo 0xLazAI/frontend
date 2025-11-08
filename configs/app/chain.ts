@@ -43,7 +43,7 @@ const chain = Object.freeze({
     decimals: Number(getEnvValue('NEXT_PUBLIC_NETWORK_CURRENCY_DECIMALS')) || DEFAULT_CURRENCY_DECIMALS,
   },
   display: {
-    burntFee: (getEnvValue("NEXT_PUBLIC_NETWORK_DISPLAY_BURNT_FEE") || 'true') === 'true',
+    burntFee: (getEnvValue('NEXT_PUBLIC_NETWORK_DISPLAY_BURNT_FEE') || 'true') === 'true',
   },
   secondaryCoin: {
     symbol: getEnvValue('NEXT_PUBLIC_NETWORK_SECONDARY_COIN_SYMBOL'),
