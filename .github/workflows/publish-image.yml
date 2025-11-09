@@ -101,6 +101,13 @@ jobs:
             #         docker-arm-host: ${{ secrets.ARM_RUNNER_HOSTNAME }}
             #         docker-arm-host-key: ${{ secrets.ARM_RUNNER_KEY }}
 
+            -   name: Log in to GitHub Container Registry
+                uses: docker/login-action@v3
+                with:
+                    registry: ghcr.io
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
+
             -   name: Build and push
                 uses: docker/build-push-action@v5
                 with:
