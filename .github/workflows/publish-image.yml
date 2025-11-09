@@ -24,26 +24,26 @@ on:
                 required: false
                 type: boolean
                 default: true
-    workflow_call:
-        inputs:
-            tags:
-                description: Image tags (e.g. "type=raw,value=foo")
-                required: false
-                type: string
-            build_args:
-                description: Build-time variables
-                required: false
-                type: string
-            platforms:
-                description: Image platforms (you can specify multiple platforms separated by comma)
-                required: false
-                type: string
-                default: linux/arm64
-            private:
-                description: Make image private (true) or public (false)
-                required: false
-                type: boolean
-                default: true
+    # workflow_call:
+    #     inputs:
+    #         tags:
+    #             description: Image tags (e.g. "type=raw,value=foo")
+    #             required: false
+    #             type: string
+    #         build_args:
+    #             description: Build-time variables
+    #             required: false
+    #             type: string
+    #         platforms:
+    #             description: Image platforms (you can specify multiple platforms separated by comma)
+    #             required: false
+    #             type: string
+    #             default: linux/arm64
+    #         private:
+    #             description: Make image private (true) or public (false)
+    #             required: false
+    #             type: boolean
+    #             default: true
 
 permissions:
     contents: read
