@@ -18,7 +18,7 @@ on:
                 description: Image platforms (you can specify multiple platforms separated by comma)
                 required: false
                 type: string
-                default: linux/amd64,linux/arm64/v8
+                default: linux/arm64
             private:
                 description: Make image private (true) or public (false)
                 required: false
@@ -38,7 +38,7 @@ on:
                 description: Image platforms (you can specify multiple platforms separated by comma)
                 required: false
                 type: string
-                default: linux/amd64,linux/arm64/v8
+                default: linux/arm64
             private:
                 description: Make image private (true) or public (false)
                 required: false
@@ -52,7 +52,7 @@ permissions:
 jobs:
     run:
         name: Run
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest-arm
         steps:
             -   name: Check out the repo
                 uses: actions/checkout@v4
@@ -85,7 +85,7 @@ jobs:
                 env:
                     REF_TYPE: ${{ github.ref_type }}
                     REF_NAME: ${{ github.ref_name }}
-                    PLATFORM: ${{ inputs.platforms || 'linux/amd64,linux/arm64/v8' }}
+                    PLATFORM: ${{ inputs.platforms || 'linux/arm64' }}
                     IMAGE_NAME: ${{ steps.image-name.outputs.image-name }}
                     IS_PRIVATE: ${{ inputs.private|| 'false' }}
                 run: |
@@ -113,10 +113,10 @@ jobs:
                     username: ${{ github.actor }}
                     password: ${{ secrets.GITHUB_TOKEN }}
 
-            -   name: Set up Docker Buildx
-                uses: docker/setup-buildx-action@v3
-                with:
-                    install: true
+            # -   name: Set up Docker Buildx
+            #     uses: docker/setup-buildx-action@v3
+            #     with:
+            #         install: true
 
             -   name: Build and push
                 uses: docker/build-push-action@v5
@@ -126,7 +126,7 @@ jobs:
                     push: true
                     cache-from: type=gha
                     tags: ${{ steps.meta.outputs.tags }}
-                    platforms: ${{ inputs.platforms || 'linux/amd64,linux/arm64/v8' }}
+                    platforms: ${{ inputs.platforms || 'linux/arm64' }}
                     labels: ${{ steps.meta.outputs.labels }}
                     build-args: |
                         GIT_COMMIT_SHA=${{ env.SHORT_SHA }}
