@@ -43,7 +43,7 @@ on:
                 description: Make image private (true) or public (false)
                 required: false
                 type: boolean
-                default: false
+                default: true
 
 permissions:
     contents: read
@@ -60,7 +60,7 @@ jobs:
             -   name: Set image name based on private flag
                 id: image-name
                 run: |
-                    if [ "${{ inputs.private }}" = "true" ]; then
+                    if [ "${{ inputs.private || 'false' }}" = "true" ]; then
                         echo "image-name=ghcr.io/0xlazai/frontend-private" >> $GITHUB_OUTPUT
                     else
                         echo "image-name=ghcr.io/0xlazai/frontend" >> $GITHUB_OUTPUT
@@ -85,9 +85,9 @@ jobs:
                 env:
                     REF_TYPE: ${{ github.ref_type }}
                     REF_NAME: ${{ github.ref_name }}
-                    PLATFORM: ${{ inputs.private }}
+                    PLATFORM: ${{ inputs.platforms || 'linux/amd64,linux/arm64/v8' }}
                     IMAGE_NAME: ${{ steps.image-name.outputs.image-name }}
-                    IS_PRIVATE: ${{ inputs.private }}
+                    IS_PRIVATE: ${{ inputs.private|| 'false' }}
                 run: |
                     echo "ref_type: $REF_TYPE"
                     echo "ref_name: $REF_NAME"
@@ -129,7 +129,7 @@ jobs:
                     push: true
                     cache-from: type=gha
                     tags: ${{ steps.meta.outputs.tags }}
-                    platforms: ${{ inputs.platforms }}
+                    platforms: ${{ inputs.platforms || 'linux/amd64,linux/arm64/v8' }}
                     labels: ${{ steps.meta.outputs.labels }}
                     build-args: |
                         GIT_COMMIT_SHA=${{ env.SHORT_SHA }}
